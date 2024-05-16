@@ -21,7 +21,7 @@ public class GameLogic implements Serializable
         numGuesses = 0;
     }
     /*
-     * Hash Map to traverse through the game based on specific responses
+     * hash Map to traverse through the game based on specific responses
      */
     private void initializeGameMap() 
     {
@@ -48,7 +48,7 @@ public class GameLogic implements Serializable
         gameMap.put(3, state3);
     }
     /**
-     * @param user's input
+     * @param users input
      * @return response
      */
     public String processGameInput(Object input) 
@@ -78,56 +78,36 @@ public class GameLogic implements Serializable
         }
     }
     /**
-     * Getter method to retrieve the number of guesses made during the game.
-     *
-     * @return The number of guesses made.
+     * @return number of guesses
      */
     public int getNumGuesses() 
     {
         return numGuesses;
     }
     /**
-     * Getter method to retrieve the player's name associated with the game.
-     *
-     * @return The player's name.
+     * @return players name
      */
     public String getPlayerName() 
     {
         return playerName;
     }
-    /**
-     * Inner class representing a game response associated with a specific game state transition.
-     * Each GameResponse contains a response message and the next game state.
-     */
     private static class GameResponse implements Serializable 
     {
         private String response;
         private int nextState;
         /**
-         * Constructor to create a new GameResponse object.
-         *
-         * @param response The response message associated with this game state.
-         * @param nextState The next game state to transition to after this response.
+         * @param response message
+         * @param next game state 
          */
         public GameResponse(String response, int nextState) 
         {
             this.response = response;
             this.nextState = nextState;
         }
-        /**
-         * Getter method to retrieve the response message.
-         *
-         * @return The response message.
-         */
         public String getResponse() 
         {
             return response;
         }
-        /**
-         * Getter method to retrieve the next game state.
-         *
-         * @return The next game state.
-         */
         public int getNextState() 
         {
             return nextState;

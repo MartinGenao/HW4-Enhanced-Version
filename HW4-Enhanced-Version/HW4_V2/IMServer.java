@@ -24,7 +24,7 @@ public class IMServer
         {
             System.out.println("Server started. Listening on port " + portNumber);
 
-            // Create a thread pool for handling client connections
+            // thread pool for handling clients
             ExecutorService executorService = Executors.newCachedThreadPool();
 
             while (true) 
@@ -33,7 +33,7 @@ public class IMServer
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("New client connected: " + clientSocket.getInetAddress().getHostAddress());
 
-                // Create a new thread for handling the client connection
+                // new thread for handling the clients
                 ClientHandler clientHandler = new ClientHandler(clientSocket, sharedLeaderboard);
                 clients.put(clientSocket, clientHandler);
                 executorService.execute(clientHandler);
@@ -69,7 +69,7 @@ public class IMServer
                 out = new ObjectOutputStream(clientSocket.getOutputStream());
                 in = new ObjectInputStream(clientSocket.getInputStream());
 
-                // Initiate conversation with client
+                // initiate conversation with client
                 Object outputObject = protocol.processInput(null, sharedLeaderboard);
                 out.writeObject(outputObject);
 
