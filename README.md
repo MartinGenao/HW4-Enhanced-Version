@@ -9,7 +9,7 @@ Enhanced Version of HW3 - Computer Networks project - Client Server Game Based o
 
 ## Features
 - Ability to handle Multiple users
-- Shared Leaderboard that updates after each completed game ( Currently Just an Array )
+- Shared Leaderboard that updates after each completed game ( Currently Just an Array List )
 - Win message
 - Guess tracker
 
