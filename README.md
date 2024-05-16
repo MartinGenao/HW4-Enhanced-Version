@@ -4,8 +4,14 @@ Enhanced Version of HW3 - Computer Networks project - Client Server Game Based o
 ## Disclaimer
 - This project was created using the BlueJ development environment, best results for use will be done with BlueJ
 
-## Introduction
+## Introduction - Riddle: Adventure Game
 - This Project is a text based adventure game that will give the user a series of prompts to respond to. The goal is to traverse the game to find the treasure in the least amount of moves possible.
+
+## Features
+- Ability to handle Multiple users
+- Shared Leaderboard that updates after each completed game ( Currently Just an Array List )
+- Win message
+- Guess tracker
 
 ## Opening the Project
 - Open project in BlueJ twice.
