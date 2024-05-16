@@ -53,9 +53,8 @@ public class IMClient
         }
     }
     /**
-     * Helper method to read user input
-     * @param BufferedReader for reading user input
-     * @return users input as object
+     * @param bufferedreader for reading input
+     * @return input as object
      * @throws IOException 
      */
     private static Object getUserInput(BufferedReader stdIn) throws IOException 

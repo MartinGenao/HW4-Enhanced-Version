@@ -17,16 +17,16 @@ public class IMProtocol implements Serializable
     private SharedLeaderboard sharedLeaderboard;
     /**
      *
-     * @param The SharedLeaderboard instance for updating leaderboard .
+     * @param SharedLeaderboard for updating leaderboard
      */
     public IMProtocol(SharedLeaderboard sharedLeaderboard) 
     {
         this.sharedLeaderboard = sharedLeaderboard;
     }
     /**
-     * @param The input from the client.
-     * @param sharedLeaderboard instance for updating leaderboard
-     * @return The response sent back to the client.
+     * @param input from client 
+     * @param sharedLeaderboard for updating leaderboard
+     * @return response sent to client
      */
     public Object processInput(Object input, SharedLeaderboard sharedLeaderboard) 
     {
