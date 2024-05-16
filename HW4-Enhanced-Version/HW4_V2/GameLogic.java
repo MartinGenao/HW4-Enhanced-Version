@@ -1,24 +1,30 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
-/*
- * The GameLogic class manages the game state as well as the transitions/responses.
- */
-public class GameLogic {
+public class GameLogic implements Serializable 
+{
     private int gameState;
     private Map<Integer, Map<String, GameResponse>> gameMap;
-    /*
-     * Initialize @GameLogic
-     * Initialize the game map/game state
+    private final ReentrantLock lock = new ReentrantLock();
+    private int numGuesses;
+    private String playerName;
+    /**
+     * @param name of the player
      */
-    public GameLogic() {
+    public GameLogic(String playerName) 
+    {
+        this.playerName = playerName;
         initializeGameMap();
-        gameState = 0; // Initial game state
+        gameState = 0; 
+        numGuesses = 0;
     }
     /*
-     * Initializes the transitions/responses of the gamestate
+     * Hash Map to traverse through the game based on specific responses
      */
-    private void initializeGameMap() {
+    private void initializeGameMap() 
+    {
         gameMap = new HashMap<>();
 
         // State 0: Introduction
@@ -41,54 +47,91 @@ public class GameLogic {
         state3.put("echo", new GameResponse("Congratulations! You have solved all the challenges and found the Lost Treasure!\nThe adventure comes to an end, and you emerge from the enchanted forest victorious.", -1));
         gameMap.put(3, state3);
     }
-    /*
-     * Process user input to advance through the game based on the input
+    /**
      * @param user's input
-     * @return the response (dependent on game transition)
+     * @return response
      */
-    public String processGameInput(String input) {
-        Map<String, GameResponse> currentState = gameMap.get(gameState);
-        if (currentState != null && input != null && currentState.containsKey(input.toLowerCase())) {
-            GameResponse response = currentState.get(input.toLowerCase());
-            gameState = response.getNextState();
+    public String processGameInput(Object input) 
+    {
+        lock.lock();
+        try 
+        {
+            Map<String, GameResponse> currentState = gameMap.get(gameState);
+            if (currentState != null && input != null && currentState.containsKey(input.toString().toLowerCase())) {
+                GameResponse response = currentState.get(input.toString().toLowerCase());
+                gameState = response.getNextState();
+                numGuesses++;
 
-            // Check if the game has ended
-            if (gameState == -1) {
+                // check if the game has ended
+                if (gameState == -1) 
+                {
+                    return response.getResponse() + "\nYou completed the game in " + numGuesses + " guesses.";
+                }
+
                 return response.getResponse();
             }
-
-            return response.getResponse();
+            numGuesses++;
+            return "Invalid input. Please try again.";
+        } finally 
+        {
+            lock.unlock();
         }
-        return "Invalid input. Please try again.";
     }
-    /*
-     * Handles game responses
+    /**
+     * Getter method to retrieve the number of guesses made during the game.
+     *
+     * @return The number of guesses made.
      */
-    private static class GameResponse {
+    public int getNumGuesses() 
+    {
+        return numGuesses;
+    }
+    /**
+     * Getter method to retrieve the player's name associated with the game.
+     *
+     * @return The player's name.
+     */
+    public String getPlayerName() 
+    {
+        return playerName;
+    }
+    /**
+     * Inner class representing a game response associated with a specific game state transition.
+     * Each GameResponse contains a response message and the next game state.
+     */
+    private static class GameResponse implements Serializable 
+    {
         private String response;
         private int nextState;
-        /*
-         * Initializes GameResponse
-         * @param The response message for the current state
-         * @param The next game state
+        /**
+         * Constructor to create a new GameResponse object.
+         *
+         * @param response The response message associated with this game state.
+         * @param nextState The next game state to transition to after this response.
          */
-        public GameResponse(String response, int nextState) {
+        public GameResponse(String response, int nextState) 
+        {
             this.response = response;
             this.nextState = nextState;
         }
-        /*
-         * Get response
-         * @return the response message
+        /**
+         * Getter method to retrieve the response message.
+         *
+         * @return The response message.
          */
-        public String getResponse() {
+        public String getResponse() 
+        {
             return response;
         }
-        /*
-         * Get the next game state
-         * @return next game state
+        /**
+         * Getter method to retrieve the next game state.
+         *
+         * @return The next game state.
          */
-        public int getNextState() {
+        public int getNextState() 
+        {
             return nextState;
         }
     }
 }
+

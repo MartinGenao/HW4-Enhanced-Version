@@ -1,13 +1,18 @@
 #BlueJ class context
 comment0.target=GameLogic
-comment0.text=\r\n\ The\ GameLogic\ class\ manages\ the\ game\ state\ as\ well\ as\ the\ transitions/responses.\r\n
-comment1.params=
-comment1.target=GameLogic()
-comment1.text=\r\n\ Initialize\ @GameLogic\r\n\ Initialize\ the\ game\ map/game\ state\r\n
+comment1.params=playerName
+comment1.target=GameLogic(java.lang.String)
+comment1.text=\r\n\ @param\ name\ of\ the\ player\r\n
 comment2.params=
 comment2.target=void\ initializeGameMap()
-comment2.text=\r\n\ Initializes\ the\ transitions/responses\ of\ the\ gamestate\r\n
+comment2.text=\r\n\ Hash\ Map\ to\ traverse\ through\ the\ game\ based\ on\ specific\ responses\r\n
 comment3.params=input
-comment3.target=java.lang.String\ processGameInput(java.lang.String)
-comment3.text=\r\n\ Process\ user\ input\ to\ advance\ through\ the\ game\ based\ on\ the\ input\r\n\ @param\ user's\ input\r\n\ @return\ the\ response\ (dependent\ on\ game\ transition)\r\n
-numComments=4
+comment3.target=java.lang.String\ processGameInput(java.lang.Object)
+comment3.text=\r\n\ @param\ user's\ input\r\n\ @return\ response\r\n
+comment4.params=
+comment4.target=int\ getNumGuesses()
+comment4.text=\r\n\ Getter\ method\ to\ retrieve\ the\ number\ of\ guesses\ made\ during\ the\ game.\r\n\r\n\ @return\ The\ number\ of\ guesses\ made.\r\n
+comment5.params=
+comment5.target=java.lang.String\ getPlayerName()
+comment5.text=\r\n\ Getter\ method\ to\ retrieve\ the\ player's\ name\ associated\ with\ the\ game.\r\n\r\n\ @return\ The\ player's\ name.\r\n
+numComments=6

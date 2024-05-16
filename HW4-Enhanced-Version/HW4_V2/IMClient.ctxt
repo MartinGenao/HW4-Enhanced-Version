@@ -2,4 +2,7 @@
 comment0.target=IMClient
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
-numComments=2
+comment2.params=stdIn
+comment2.target=java.lang.Object\ getUserInput(java.io.BufferedReader)
+comment2.text=\r\n\ Helper\ method\ to\ read\ user\ input\r\n\ @param\ BufferedReader\ for\ reading\ user\ input\r\n\ @return\ users\ input\ as\ object\r\n\ @throws\ IOException\ \r\n
+numComments=3

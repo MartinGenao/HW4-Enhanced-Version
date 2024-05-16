@@ -1,10 +1,9 @@
 #BlueJ class context
 comment0.target=IMProtocol
-comment0.text=\r\n\ This\ has\ been\ modified\ to\ handle\ the\ conversation\ along\ with\ game\ integration.\r\n\ \r\n
-comment1.params=
-comment1.target=IMProtocol()
-comment1.text=\r\n\ Creates\ new\ instance\ of\ GameLogic\r\n\ Initializes\ IMProtocol\r\n
-comment2.params=input
-comment2.target=java.lang.String\ processInput(java.lang.String)
-comment2.text=\r\n\ Prcoess\ user\ input\ based\ on\ the\ conversation\ state\r\n\ @param\ The\ users\ input\r\n\ @return\ The\ response\ based\ on\ current\ state\r\n
+comment1.params=sharedLeaderboard
+comment1.target=IMProtocol(SharedLeaderboard)
+comment1.text=\r\n\r\n\ @param\ The\ SharedLeaderboard\ instance\ for\ updating\ leaderboard\ .\r\n
+comment2.params=input\ sharedLeaderboard
+comment2.target=java.lang.Object\ processInput(java.lang.Object,\ SharedLeaderboard)
+comment2.text=\r\n\ @param\ The\ input\ from\ the\ client.\r\n\ @param\ sharedLeaderboard\ instance\ for\ updating\ leaderboard\r\n\ @return\ The\ response\ sent\ back\ to\ the\ client.\r\n
 numComments=3

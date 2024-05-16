@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=SharedLeaderboard
+comment1.params=
+comment1.target=SharedLeaderboard()
+comment2.params=playerName\ numGuesses
+comment2.target=void\ addEntry(java.lang.String,\ int)
+comment2.text=\r\n\ @param\ name\ of\ the\ player\r\n\ @param\ number\ of\ guesses\ made\r\n
+comment3.params=
+comment3.target=java.util.List\ getLeaderboard()
+comment3.text=\r\n\ @return\ list\ of\ formatted\ strings\r\n
+numComments=4

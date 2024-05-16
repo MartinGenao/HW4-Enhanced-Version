@@ -1,15 +1,13 @@
-/*
- * This remained unchanged.
- */
 import java.io.*;
 import java.net.*;
 
-public class IMClient {
-    public static void main(String[] args) throws IOException {
-        
-        if (args.length != 2) {
-            System.err.println(
-                "Usage: java IMClient <host name> <port number>");
+public class IMClient 
+{
+    public static void main(String[] args) throws IOException 
+    {
+        if (args.length != 2) 
+        {
+            System.err.println("Usage: java IMClient <host name> <port number>");
             System.exit(1);
         }
 
@@ -17,42 +15,56 @@ public class IMClient {
         int portNumber = Integer.parseInt(args[1]);
 
         try (
-            //2.) Client initiates connection request
+            // establish a socket connection to the host and port
             Socket kkSocket = new Socket(hostName, portNumber);
-            PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(
-                new InputStreamReader(kkSocket.getInputStream()));
-        ) {
-            BufferedReader stdIn =
-                new BufferedReader(new InputStreamReader(System.in));
-                
-            String fromServer;
-            String fromUser;
-            //5.) Receieve message from server
-            while ((fromServer = in.readLine()) != null) 
+            ObjectOutputStream out = new ObjectOutputStream(kkSocket.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(kkSocket.getInputStream());
+        ) 
+        {
+            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+
+            // receive initial message
+            Object serverResponse = in.readObject();
+            System.out.println(serverResponse);
+
+            Object userInput;
+            while ((userInput = getUserInput(stdIn)) != null) 
             {
-                //6.) Print message from server
-                System.out.println(fromServer);
-                if (fromServer.equals("Bye"))
-                    break;
-                //7.) Read response from client
-                fromUser = stdIn.readLine();
-                if (fromUser != null) 
+                out.writeObject(userInput);
+                out.flush();
+                
+                // response from the server
+                serverResponse = in.readObject();
+                System.out.println(serverResponse);
+                // loop stops if 'bye'
+                if (serverResponse.toString().equalsIgnoreCase("Bye")) 
                 {
-                    System.out.println("Client: " + fromUser);
-                    //8.) Send response to server
-                    out.println(fromUser);
+                    break;
                 }
             }
         } catch (UnknownHostException e) 
         {
             System.err.println("Don't know about host " + hostName);
             System.exit(1);
-        } catch (IOException e) 
+        } catch (IOException | ClassNotFoundException e) 
         {
-            System.err.println("Couldn't get I/O for the connection to " +
-                hostName);
+            System.err.println("Couldn't get I/O for the connection to " + hostName);
             System.exit(1);
         }
+    }
+    /**
+     * Helper method to read user input
+     * @param BufferedReader for reading user input
+     * @return users input as object
+     * @throws IOException 
+     */
+    private static Object getUserInput(BufferedReader stdIn) throws IOException 
+    {
+        System.out.print("Your input: ");
+        String input = stdIn.readLine();
+        if (input != null && !input.isEmpty()) {
+            return input;
+        }
+        return null;
     }
 }
